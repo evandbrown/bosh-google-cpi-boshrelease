@@ -1,7 +1,6 @@
 ---
 <%
 director_uuid = "e7dc1dd8-90a8-4654-a1d2-3fa7691f1dc5"
-vip_ip = "104.197.144.58"
 common_password = "c1oudc0w"
 deployment_name = "concourse"
 %>
@@ -16,15 +15,13 @@ releases:
 
 instance_groups:
 - name: web
-  instances: 1
+  instances: 2
   vm_type: common
+  azs: [z1, z2]
   stemcell: trusty
   networks: 
-  - name: public
+  - name: public-concourse
     default: [dns, gateway]
-  - name: vip
-    static_ips:
-      - <%= vip_ip %>
 
   jobs:
   - name: atc
